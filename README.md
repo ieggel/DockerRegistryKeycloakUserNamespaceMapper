@@ -28,7 +28,7 @@ In case you run Keycloak as a Docker container, first copy the jar file to the c
 
 ### 3. Create module
 
-You have first have to create a module:
+You first have to create a module:
 
 `KEYCLOAK_HOME/bin/jboss-cli.sh --command="module add --name=ch.hevs.medgift.keycloak.docker-user-namespace-mapper --resources=/docker-user-namespace-mapper.jar --dependencies=org.keycloak.keycloak-core,org.keycloak.keycloak-services,org.keycloak.keycloak-server-spi-private,org.keycloak.keycloak-server-spi"`
 
@@ -50,7 +50,7 @@ Once you’ve created the module you need to register this module with Keycloak.
     ...
 ```
 
-*Note*: _Keep in mind that if you use the official [jboss/keycloak](https://hub.docker.com/r/jboss/keycloak/) image with the default configuration, you have to edit standalone-ha.xml and NOT standalone.xml. More info here: [https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker](https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker)_.
+*Note*: _Keep in mind that if you use the official [jboss/keycloak](https://hub.docker.com/r/jboss/keycloak/) Docker image with the default configuration, you have to edit standalone-ha.xml and NOT standalone.xml. More info here: [https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker](https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker)_.
 
 #### 4.2 Register module using the jboss-cli
 
