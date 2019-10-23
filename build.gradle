@@ -1,0 +1,41 @@
+ 
+
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+}
+
+archivesBaseName = 'docker-user-namespace-mapper'
+
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+ext {
+    keycloakVersion = '7.0.0'
+}
+
+dependencies {
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    //api 'org.apache.commons:commons-math3:3.6.1'
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    //runtime 'org.keycloak:keycloak-core:7.0.0'
+    
+    //implementation 'org.keycloak:keycloak-model-api:1.8.1.Final'
+    
+
+    compileOnly "org.keycloak:keycloak-core:${keycloakVersion}"    
+    
+    compileOnly "org.keycloak:keycloak-services:${keycloakVersion}"    
+    
+    compileOnly "org.keycloak:keycloak-server-spi-private:${keycloakVersion}"
+    
+    compileOnly "org.keycloak:keycloak-server-spi:${keycloakVersion}"
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
