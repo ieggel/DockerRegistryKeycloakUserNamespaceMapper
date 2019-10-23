@@ -1,4 +1,4 @@
-#Keycloak docker registry user namespace mapper
+# Keycloak docker registry user namespace mapper
 
 Docker Registry V2 Authentciation is an OIDC-Like protocol used to authenticate users against a Docker registry. Keycloak’s implementation of this protocol allows for a Keycloak authentication server to be used by a Docker client to authenticate against a registry. 
 
@@ -12,7 +12,7 @@ This project provides a custom role- and namespace-based mapper which populates 
  If more scopes are present than what has been requested, they will be removed.
 
 that is capable of granting the requested permissions on a repo that is prefixed with a namespace that matches the user's username. and the user must have the role _user_ assigned for this to apply
-The namespace itself can only consist of one level (e.g. \<namespace>\<imagename>). 
+The namespace itself can only consist of one level (e.g. \<namespace>/\<imagename>). 
 
 ## Setup
 
@@ -53,7 +53,7 @@ Once you’ve created the module you need to register this module with Keycloak.
     ...
 ```
 
-*Note*: _Keep in mind that if you use the official [jboss/keycloak](https://hub.docker.com/r/jboss/keycloak/) image with the default configuration, you have to edit standalone-ha.xml and NOT standalone.xml. More info here: [https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker](https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker)_
+*Note*: _Keep in mind that if you use the official [jboss/keycloak](https://hub.docker.com/r/jboss/keycloak/) image with the default configuration, you have to edit standalone-ha.xml and NOT standalone.xml. More info here: [https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker](https://stackoverflow.com/questions/57208709/keycloak-spi-providers-and-layers-not-loading-when-using-docker)_.
 
 #### 4.2 Register module using the jboss-cli
 
@@ -61,20 +61,6 @@ Alternatively - instead of manually editing standalone.xml, standalone-ha.xml, o
 
 `KEYCLOAK_HOME/bin/jboss-cli.sh --connect --command="/subsystem=keycloak-server:list-add(name=providers, value=module:ch.hevs.medgift.keycloak.docker-user-namespace-mapper)"`
 
-This will automatically edit the correct file which is - depending on your config (e.g. cluster mode)- currently used by Keycloak.
+This will automatically edit the correct file which is - depending on your config (e.g. cluster mode) - currently used by Keycloak.
 
 ### 5. Start/restart keycloak
-
-
-
-
-
-
-Tests to do
-*******
-Answer own question on stackoverflow
-dev deployment from scratch
-docker image keycloak
-prod deployment
-
-
