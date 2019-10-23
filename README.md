@@ -2,17 +2,14 @@
 
 Docker Registry V2 Authentciation is an OIDC-Like protocol used to authenticate users against a Docker registry. Keycloak’s implementation of this protocol allows for a Keycloak authentication server to be used by a Docker client to authenticate against a registry. 
 
-Keycloak already comes with the _AllowAllDockerProtocolMapper_ which populates the token that is issued by keycloak for the Docker registry with the requested scope. In practice this means that if the user successfully authenticates they have full push/pull permissions to any repository in the registry. In most cases this is not enough.
+Keycloak already comes with the _AllowAllDockerProtocolMapper_ which populates the token that is issued by Keycloak for the Docker registry with the requested scope. In practice this means that if the user successfully authenticates they have full push/pull permissions to any repository in the registry. In most cases this is not enough.
 
 This project provides a custom role- and namespace-based mapper which populates the token with the requested scope if:
 
-- user has admin role assigned
-- user has user role assigned and requested resource consists of a 1-level namespace (i.e. <namespace>/<imagename>) that matches his username.
+- user has admin role assigned.
+- user has user role assigned and requested resource consists of a 1-level namespace (i.e. \<namespace>/\<imagename>) that matches his username.
  
- If more scopes are present than what has been requested, they will be removed.
-
-that is capable of granting the requested permissions on a repo that is prefixed with a namespace that matches the user's username. and the user must have the role _user_ assigned for this to apply
-The namespace itself can only consist of one level (e.g. \<namespace>/\<imagename>). 
+If more scopes are present than what has been requested, they will be removed.
 
 ## Setup
 
@@ -20,11 +17,11 @@ The namespace itself can only consist of one level (e.g. \<namespace>/\<imagenam
 
 `./gradlew clean jar`
 
-This will create a jar named _docker-user-namespace-mapper.jar_ in _build/libs/_
+This will create a jar named _docker-user-namespace-mapper.jar_ in _build/libs/_.
 
-### 2. (Only if using keycloak in docker container: Copy jar to container)
+### 2. (Only if using Keycloak in docker container: Copy jar to container)
 
-In case you run keycloak as a docker container, first copy the jar file to the container:
+In case you run Keycloak as a docker container, first copy the jar file to the container:
 
 `docker cp build/libs/docker-user-namespace-mapper.jar <CONTAINER>:/docker-user-namespace-mapper.jar`
 
@@ -63,4 +60,4 @@ Alternatively - instead of manually editing standalone.xml, standalone-ha.xml, o
 
 This will automatically edit the correct file which is - depending on your config (e.g. cluster mode) - currently used by Keycloak.
 
-### 5. Start/restart keycloak
+### 5. Start/restart Keycloak
