@@ -1,13 +1,13 @@
 # Keycloak docker registry user namespace mapper
 
-Docker Registry V2 Authentciation is an OIDC-Like protocol used to authenticate users against a Docker registry. Keycloak’s implementation of this protocol allows for a Keycloak authentication server to be used by a Docker client to authenticate against a registry. 
+_Docker Registry V2 Authentciation is an OIDC-Like protocol used to authenticate users against a Docker registry. Keycloak’s implementation of this protocol allows for a Keycloak authentication server to be used by a Docker client to authenticate against a registry._ 
 
 Keycloak already comes with the _AllowAllDockerProtocolMapper_ which populates the token that is issued by Keycloak for the Docker registry with the requested scope. In practice this means that if the user successfully authenticates they have full push/pull permissions to any repository in the registry. In most cases this is not enough.
 
 This project provides a custom role- and namespace-based mapper which populates the token with the requested scope if:
 
-- user has admin role assigned.
-- user has user role assigned and requested resource consists of a 1-level namespace (i.e. \<namespace>/\<imagename>) that matches his username.
+- user has **admin role** assigned.
+- user has **user role** assigned and requested resource consists of a 1-level **namespace** (i.e. \<namespace>/\<imagename>) that matches his username.
  
 If more scopes are present than what has been requested, they will be removed.
 
@@ -21,7 +21,7 @@ This will create a jar named _docker-user-namespace-mapper.jar_ in _build/libs/_
 
 ### 2. (Only if using Keycloak in docker container: Copy jar to container)
 
-In case you run Keycloak as a docker container, first copy the jar file to the container:
+In case you run Keycloak as a Docker container, first copy the jar file to the container:
 
 `docker cp build/libs/docker-user-namespace-mapper.jar <CONTAINER>:/docker-user-namespace-mapper.jar`
 
@@ -54,7 +54,7 @@ Once you’ve created the module you need to register this module with Keycloak.
 
 #### 4.2 Register module using the jboss-cli
 
-Alternatively - instead of manually editing standalone.xml, standalone-ha.xml, or domain.xml - you can execute the following command:
+Alternatively - instead of manually editing _standalone.xml_, _standalone-ha.xml_, or _domain.xml_ - you can execute the following command:
 
 `KEYCLOAK_HOME/bin/jboss-cli.sh --connect --command="/subsystem=keycloak-server:list-add(name=providers, value=module:ch.hevs.medgift.keycloak.docker-user-namespace-mapper)"`
 
