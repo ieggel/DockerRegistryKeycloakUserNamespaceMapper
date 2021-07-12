@@ -11,7 +11,17 @@ This project provides a custom role- and namespace-based mapper which populates 
  
 If more scopes are present than what has been requested, they will be removed.
 
-## Setup
+## Dockerfile Setup
+
+The Dockerfile supplied in this repository contains the instructions required to build the module and bundle it with the official jboss/keycloak image. This command will build the extended image:
+
+```
+docker build . -t keycloak-extended
+```
+
+In addition to supporting the user namespace module, the resulting image also has docker support option enabled by default (that is, no `-Dkeycloak.profile.feature.docker=enabled` argument is needed).
+
+## Manual Setup
 
 ### 1. Generate jar file
 
